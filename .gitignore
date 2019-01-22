@@ -1,0 +1,5 @@
+*.xlsx
+~*.xlsx
+*.pdf
+*.PDF
+.DS_Store
