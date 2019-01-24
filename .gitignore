@@ -2,3 +2,5 @@
 ~*.xlsx
 *.pdf
 *.PDF
+.vscode/
+__pycache__/

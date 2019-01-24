@@ -26,13 +26,12 @@ planilha = df1[4]
 
 #variaveis de escrita 
 #writer = pd.ExcelWriter(saida+'example.xlsx', engine='xlsxwriter')
-
-
 #para escrever o arquivo:
 #df1.to_excel(writer, 'CONSOLIDADA')
 #writer.save()
 
 # Modelo final da planilha:
 #MONTADORA MODELO TIPO ANO CAPACIDADE(L) RECOMENDACAO_CASTROL
+
 
 print (planilha)
