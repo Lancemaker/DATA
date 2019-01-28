@@ -22,14 +22,13 @@ workbook= load_workbook(planilhasArquivo+basica)
 
 #MONTADORA 	MODELO 	TIPO	 ANO 	CAPACIDADE	RECOMENDACAO_CASTROL
 planilha=workbook.get_sheet_by_name("Planilha1")
-TabFiltro1=workbook.create_sheet("Filtro1_Agrupamento ")
-TabFiltro2=workbook.create_sheet("Filtro2_Remoção de carros sem Recomendação de oleo")
-TabFiltro3=workbook.create_sheet("Filtro3_Concatenação de ")
 
-
+TabFiltro1=workbook.create_sheet("Filtro_1")
+TabFiltro2=workbook.create_sheet("Filtro_2")
 
 carros = []
 carrosFiltrados =[]
+filtroModelo=[]
 for num in range(2,7833):
 #preenche os objetos
     carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value,planilha['E'+str(num)].value,planilha['F'+str(num)].value)    
@@ -51,14 +50,18 @@ for num in range(2,7833):
         else:
             carrosFiltrados.append(carro)
 
-#Rotulos
-TabFiltro1['A1']="MONTADORA"
-TabFiltro1['B1']="MODELO"
-TabFiltro1['C1']="TIPO"
-TabFiltro1['D1']="ANO"
-TabFiltro1['E1']="CAPACIDADE"
-TabFiltro1['F1']="RECOMENDACAO_CASTROL"
 
+#Rotulos
+def addRotulos(tabela):
+        tabela['A1']="MONTADORA"
+        tabela['B1']="MODELO"
+        tabela['C1']="TIPO"
+        tabela['D1']="ANO"
+        tabela['E1']="CAPACIDADE"
+        tabela['F1']="RECOMENDACAO_CASTROL"
+
+
+addRotulos(TabFiltro1)
 count=1
 for c in carrosFiltrados:
     count+=1
@@ -69,14 +72,7 @@ for c in carrosFiltrados:
     TabFiltro1['E'+str(count)]=c.capacidade
     TabFiltro1['F'+str(count)]=c.recomendacao
 
-#Rotulos
-TabFiltro2['A1']="MONTADORA"
-TabFiltro2['B1']="MODELO"
-TabFiltro2['C1']="TIPO"
-TabFiltro2['D1']="ANO"
-TabFiltro2['E1']="CAPACIDADE"
-TabFiltro2['F1']="RECOMENDACAO_CASTROL"
-
+addRotulos(TabFiltro2)
 count=1
 for c in carrosFiltrados:
     if c.recomendacao!="-":
@@ -86,11 +82,9 @@ for c in carrosFiltrados:
         TabFiltro2['C'+str(count)]=c.tipo
         TabFiltro2['D'+str(count)]=str(c.ano)
         TabFiltro2['E'+str(count)]=c.capacidade
-        TabFiltro2['F'+str(count)]=c.recomendacao
+        TabFiltro2['F'+str(count)]=c.recomendacao    
 
-workbook.save('planilha_teste_errata.xlsx')
-
-
+workbook.save('planilha.xlsx')
 
 #print(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value,planilha['E'+str(num)].value,planilha['F'+str(num)].value,planilha['G'+str(num)].value)
 
