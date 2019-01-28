@@ -22,14 +22,16 @@ workbook= load_workbook(planilhasArquivo+basica)
 
 #MONTADORA 	MODELO 	TIPO	 ANO 	CAPACIDADE	RECOMENDACAO_CASTROL
 planilha=workbook.get_sheet_by_name("Planilha1")
-TabFiltro1=workbook.create_sheet("Filtro_Agrupamento de ano")
-TabFiltro2=workbook.create_sheet("Filtro_Remoção de carros sem Recomendação de oleo")
+TabFiltro1=workbook.create_sheet("Filtro1_Agrupamento ")
+TabFiltro2=workbook.create_sheet("Filtro2_Remoção de carros sem Recomendação de oleo")
+TabFiltro3=workbook.create_sheet("Filtro3_Concatenação de ")
 
 
 
 carros = []
 carrosFiltrados =[]
 for num in range(2,7833):
+#preenche os objetos
     carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value,planilha['E'+str(num)].value,planilha['F'+str(num)].value)    
     print(num)
     catch = re.findall(r"[-+]?\d*\.\d", carro.modelo)
