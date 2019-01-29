@@ -17,8 +17,8 @@ basica= "planilha.xlsx"
 
 workbook= load_workbook(planilhasArquivo+basica)
 
-planilha=workbook.get_sheet_by_name('Filtro_2')
-TabFiltro3=workbook.create_sheet("Filtro_3")
+planilha=workbook.get_sheet_by_name('Filtro_3')
+TabFiltro4=workbook.create_sheet("Filtro_4")
 
 carros = []
 carrosFiltrados=[]
@@ -81,19 +81,19 @@ def addRotulos(tabela):
         tabela['F1']="RECOMENDACAO_CASTROL"
 
 
-addRotulos(TabFiltro3)
+addRotulos(TabFiltro4)
 count=1
 for c in carros:
     t=""
     count+=1
-    TabFiltro3['A'+str(count)]=c.montadora
-    TabFiltro3['B'+str(count)]=c.modelo
-    TabFiltro3['C'+str(count)]=c.tipo
+    TabFiltro4['A'+str(count)]=c.montadora
+    TabFiltro4['B'+str(count)]=c.modelo
+    TabFiltro4['C'+str(count)]=c.tipo
     for y in c.ano:
         t+=str(y)+" "
-    TabFiltro3['D'+str(count)]=t
-    TabFiltro3['E'+str(count)]=c.capacidade
-    TabFiltro3['F'+str(count)]=c.recomendacao
+    TabFiltro4['D'+str(count)]=t
+    TabFiltro4['E'+str(count)]=c.capacidade
+    TabFiltro4['F'+str(count)]=c.recomendacao
 workbook.save('planilha.xlsx')
 #print(num,carro.modelo,carro.ano)
 #com erro linha 43

@@ -78,7 +78,6 @@ for c in carrosFiltrados:
 
 addRotulos(TabFiltro2)
 count=1
-
 for c in carrosFiltrados:
     if c.recomendacao!="-":
         t=""
@@ -93,6 +92,8 @@ for c in carrosFiltrados:
         TabFiltro2['F'+str(count)]=c.recomendacao    
 
 workbook.save('planilha.xlsx')
+
+
 
 #print(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value,planilha['E'+str(num)].value,planilha['F'+str(num)].value,planilha['G'+str(num)].value)
 

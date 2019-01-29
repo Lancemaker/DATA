@@ -4,4 +4,4 @@
 *.PDF
 *.pyc
 .vscode/
-__pycache__/
+__pycache__/1
