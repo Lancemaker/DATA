@@ -63,24 +63,32 @@ def addRotulos(tabela):
 
 addRotulos(TabFiltro1)
 count=1
+
 for c in carrosFiltrados:
+    t=""
     count+=1
     TabFiltro1['A'+str(count)]=c.montadora
     TabFiltro1['B'+str(count)]=c.modelo
     TabFiltro1['C'+str(count)]=c.tipo
-    TabFiltro1['D'+str(count)]=str(c.ano)
+    for y in c.ano:
+        t+=str(y)+" "
+    TabFiltro1['D'+str(count)]=t
     TabFiltro1['E'+str(count)]=c.capacidade
     TabFiltro1['F'+str(count)]=c.recomendacao
 
 addRotulos(TabFiltro2)
 count=1
+
 for c in carrosFiltrados:
     if c.recomendacao!="-":
+        t=""
         count+=1
         TabFiltro2['A'+str(count)]=c.montadora
         TabFiltro2['B'+str(count)]=c.modelo
         TabFiltro2['C'+str(count)]=c.tipo
-        TabFiltro2['D'+str(count)]=str(c.ano)
+        for y in c.ano:
+            t+=str(y)+" "
+        TabFiltro2['D'+str(count)]=t
         TabFiltro2['E'+str(count)]=c.capacidade
         TabFiltro2['F'+str(count)]=c.recomendacao    
 

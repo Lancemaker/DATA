@@ -25,8 +25,10 @@ carrosFiltrados=[]
 
 for num in range(2,2923):
     tempString=""
-    carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value,planilha['E'+str(num)].value,planilha['F'+str(num)].value)
+    carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value.split(" "),planilha['E'+str(num)].value,planilha['F'+str(num)].value)
     
+    carro.ano=carro.ano[0]
+    carro.ano=carro.ano[:-1]
     #Regras para renomear os carros:
     temp=carro.modelo.split(" ")
     
@@ -36,14 +38,9 @@ for num in range(2,2923):
         carro.modelo=tempString
     else:
         carro.modelo=temp[0]
-    carros.append(carro)
-    if(num>2):
-        if (carro.modelo==carros[num-3].modelo) and (carro.recomendacao==carros[num-3].recomendacao) and (carro.tipo==carros[num-3].tipo) and (carro.capacidade == carros[num-3].capacidade):
-            for c in carro.ano:
-                for a in carros[num-3].ano:
-                    if c  not in a:
-                        carros[num-3].ano.append(a)
-        carrosFiltrados.append(carros[num-3])
-    print(len(carrosFiltrados))
+    
+    print(num,carro.modelo,carro.ano)
+     
+
     #com erro linha 43
     #print(num, carrosFiltrados[num-3].montadora, carrosFiltrados[num-3].modelo, carrosFiltrados[num-3].tipo, carrosFiltrados[num-3].ano, carrosFiltrados[num-3].capacidade, carrosFiltrados[num-3].recomendacao)
