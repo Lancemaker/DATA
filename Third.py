@@ -23,51 +23,49 @@ TabFiltro4=workbook.create_sheet("Filtro_4")
 carros = []
 carrosFiltrados=[]
 
-for num in range(2,2923):
+for num in range(2,2045):
     tempString=""
     carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value.split(" "),planilha['E'+str(num)].value,planilha['F'+str(num)].value)
     
     carro.ano=carro.ano[0]
-    if(carro.ano[-1]==" "):
+    if(carro.ano[-1]==" " or carro.ano[-1]==''):
         carro.ano=carro.ano[:-1]
     #tratando data
+ 
 
     i=0
     while i<len(carro.ano):
         carro.ano[i]=carro.ano[i].replace('[','')
         carro.ano[i]=carro.ano[i].replace(']','')
         carro.ano[i]=carro.ano[i].replace(',','')
+        #carro.ano[i]=carro.ano[i].replace('\'','')
         i+=1
     #Regras para renomear os carros:
-    temp=carro.modelo.split(" ")
-    
-    if  ("DPF" in temp):
-        for item in temp:
-            tempString+=item+" "
-        carro.modelo=tempString
-       
-    else:
-        carro.modelo=temp[0]
     if(len(carros)==0):
         carros.append(carro)
     else:
         last=carros[-1]
+        print(last.ano,carro.ano)
         if(carro.montadora==last.montadora and carro.modelo==last.modelo and carro.tipo==last.tipo and carro.capacidade==last.capacidade and carro.recomendacao==last.recomendacao):
-            x=y=0
+            last.ano=last.ano+carro.ano
+            
+            '''x=y=0
             while x<len(carro.ano):                
                 while y<len(last.ano):                    
                     if carro.ano[x] not in last.ano:
                         last.ano.append(carro.ano[x])
                         if(not carro.ano[x].isalpha()):
-                            last.ano.sort()                        
+                            last.ano.sort()    
+                                           
                     y+=1  
                 x+=1
-                    
-        else:
-            carros.append(carro)
-for c in carros:
-    print(c.montadora,c.modelo,c.tipo,c.ano,c.capacidade,c.recomendacao)
-print(len(carros))
+            '''
+        else:                 
+            carros.append(carro)     
+        print(carros[-1].ano)   
+#for c in carros:
+    #print(c.montadora,c.modelo,c.tipo,c.ano,c.capacidade,c.recomendacao)
+#print(len(carros))
 
 
 
@@ -89,12 +87,15 @@ for c in carros:
     TabFiltro4['A'+str(count)]=c.montadora
     TabFiltro4['B'+str(count)]=c.modelo
     TabFiltro4['C'+str(count)]=c.tipo
-    for y in c.ano:
-        t+=str(y)+" "
-    TabFiltro4['D'+str(count)]=t
+    if(c.montadora != "TOYOTA"):
+        if(len(c.ano)>1):
+            c.ano.sort()
+            c.ano=[c.ano[0]+" ate "+c.ano[-1]]
+        TabFiltro4['D'+str(count)]=c.ano[0]
+    else:
+        for y in c.ano:
+            t+=str(y)+" "
+        TabFiltro4['D'+str(count)]=t
     TabFiltro4['E'+str(count)]=c.capacidade
     TabFiltro4['F'+str(count)]=c.recomendacao
 workbook.save('planilha.xlsx')
-#print(num,carro.modelo,carro.ano)
-#com erro linha 43
-#print(num, carrosFiltrados[num-3].montadora, carrosFiltrados[num-3].modelo, carrosFiltrados[num-3].tipo, carrosFiltrados[num-3].ano, carrosFiltrados[num-3].capacidade, carrosFiltrados[num-3].recomendacao)
