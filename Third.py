@@ -27,11 +27,11 @@ for num in range(2,2045):
     tempString=""
     carro = Carro(planilha['A'+str(num)].value,planilha['B'+str(num)].value,planilha['C'+str(num)].value,planilha['D'+str(num)].value.split(" "),planilha['E'+str(num)].value,planilha['F'+str(num)].value)
     
-    carro.ano=carro.ano[0]
-    if(carro.ano[-1]==" " or carro.ano[-1]==''):
-        carro.ano=carro.ano[:-1]
-    #tratando data
- 
+    if(carro.montadora != "LAND ROVER")or(carro.montadora != "TOYOTA"):
+        carro.ano=carro.ano[0]
+        if(carro.ano[-1]==" " or carro.ano[-1]==''):
+            carro.ano=carro.ano[:-1]
+        #tratando data
 
     i=0
     while i<len(carro.ano):
@@ -45,7 +45,7 @@ for num in range(2,2045):
         carros.append(carro)
     else:
         last=carros[-1]
-        print(last.ano,carro.ano)
+
         if(carro.montadora==last.montadora and carro.modelo==last.modelo and carro.tipo==last.tipo and carro.capacidade==last.capacidade and carro.recomendacao==last.recomendacao):
             last.ano=last.ano+carro.ano
             
@@ -62,7 +62,7 @@ for num in range(2,2045):
             '''
         else:                 
             carros.append(carro)     
-        print(carros[-1].ano)   
+        print(carros[-1].modelo)   
 #for c in carros:
     #print(c.montadora,c.modelo,c.tipo,c.ano,c.capacidade,c.recomendacao)
 #print(len(carros))
@@ -87,15 +87,27 @@ for c in carros:
     TabFiltro4['A'+str(count)]=c.montadora
     TabFiltro4['B'+str(count)]=c.modelo
     TabFiltro4['C'+str(count)]=c.tipo
-    if(c.montadora != "TOYOTA"):
+    if(c.montadora != 'TOYOTA'):
+        print(c.montadora)
         if(len(c.ano)>1):
             c.ano.sort()
             c.ano=[c.ano[0]+" ate "+c.ano[-1]]
         TabFiltro4['D'+str(count)]=c.ano[0]
     else:
-        for y in c.ano:
-            t+=str(y)+" "
+        
+        if(c.montadora=='TOYOTA'):
+            x=0
+            t=""
+            while(x<len(c.ano)):
+                c.ano[x]=c.ano[x].replace('[','')
+                c.ano[x]=c.ano[x].replace(']','')
+                c.ano[x]=c.ano[x].replace('\"','')
+                c.ano[x]=c.ano[x].replace('\'','')
+                c.ano[x]=c.ano[x].replace(',','')    
+                t=t+" "+c.ano[x]
+                x+=1                       
         TabFiltro4['D'+str(count)]=t
     TabFiltro4['E'+str(count)]=c.capacidade
     TabFiltro4['F'+str(count)]=c.recomendacao
 workbook.save('planilha.xlsx')
+

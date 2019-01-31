@@ -47,7 +47,8 @@ for num in range(2,2923):
         carro.modelo=tempString
        
     else:
-        carro.modelo=temp[0]
+        if(carro.montadora != "LAND ROVER")or(carro.montadora != "TOYOTA"):
+            carro.modelo=temp[0]
     if(len(carros)==0):
         carros.append(carro)
     else:
@@ -58,7 +59,7 @@ for num in range(2,2923):
                 while y<len(last.ano):                    
                     if carro.ano[x] not in last.ano:
                         last.ano.append(carro.ano[x])
-                        if(not carro.ano[x].isalpha()):
+                        if(carro.montadora != "TOYOTA"):
                             last.ano.sort()                        
                     y+=1  
                 x+=1
